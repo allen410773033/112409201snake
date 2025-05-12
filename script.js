@@ -38,6 +38,7 @@ function initGame() {
     clearInterval(gameInterval);
     clearInterval(timerInterval);
     startButton.disabled = false;
+    // 如果 HTML 中有 timerDisplay，則設置其文本內容
 }
 
 // Firebase 設定

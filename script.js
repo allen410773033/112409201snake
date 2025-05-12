@@ -5,7 +5,28 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const leaderboardElement = document.getElementById("leaderboard");
 
-function initGame()
+// *** 將 initGame() 函數定義移動到這裡 ***
+function initGame() {
+    canvas.width = 400;
+    canvas.height = 400;
+    snake = [
+        { x: 5, y: 5 },
+        { x: 4, y: 5 },
+        { x: 3, y: 5 }
+    ];
+    direction = "RIGHT";
+    food = generateFood();
+    obstacles = generateObstacles(5);
+    score = 0;
+    gameSpeed = 100;
+    isGameOver = false;
+    scoreDisplay.textContent = `分數: ${score}`; // 如果 HTML 中有 scoreDisplay
+    timerDisplay.textContent = `時間: 0 秒`; // 如果 HTML 中有 timerDisplay
+    clearInterval(gameInterval);
+    clearInterval(timerInterval); // 如果需要計時器
+    startButton.disabled = false;
+}
+
 
 // Firebase 設定
 const firebaseConfig = {
@@ -38,28 +59,6 @@ let score;
 let gameSpeed;
 let startTime; // 如果需要計時器
 let timerInterval; // 如果需要計時器
-
-// *** 將 initGame() 函數定義移動到這裡 ***
-function initGame() {
-    canvas.width = 400;
-    canvas.height = 400;
-    snake = [
-        { x: 5, y: 5 },
-        { x: 4, y: 5 },
-        { x: 3, y: 5 }
-    ];
-    direction = "RIGHT";
-    food = generateFood();
-    obstacles = generateObstacles(5);
-    score = 0;
-    gameSpeed = 100;
-    isGameOver = false;
-    scoreDisplay.textContent = `分數: ${score}`; // 如果 HTML 中有 scoreDisplay
-    timerDisplay.textContent = `時間: 0 秒`; // 如果 HTML 中有 timerDisplay
-    clearInterval(gameInterval);
-    clearInterval(timerInterval); // 如果需要計時器
-    startButton.disabled = false;
-}
 
 // 從 Firebase 載入排行榜資料並顯示
 function loadLeaderboard() {

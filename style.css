@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding-bottom: 30px; /* 為排行榜預留空間 */
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+#game-container {
+    position: relative;
+    background-color: #000;
+    border: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px; /* 為排行榜預留空間 */
+}
+
+#game-controls {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 10px;
+    color: white;
+}
+
+canvas {
+    display: block;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+#leaderboard {
+    list-style-type: decimal;
+    padding-left: 20px;
+    width: 300px;
+}
+
+#leaderboard li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+}
+
+#leaderboard li:last-child {
+    border-bottom: none;
+}
+
+.leaderboard-info {
+    flex-grow: 1;
+}
+
+.leaderboard-time {
+    font-size: 0.8em;
+    color: #888;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貪食蛇遊戲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>貪食蛇遊戲</h1>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="game-controls">
+            <button id="startButton">開始遊戲</button>
+            <div id="score">分數: 0</div>
+            <div id="timer">時間: 0 秒</div>
+        </div>
+    </div>
+
+    <h2>排行榜</h2>
+    <ol id="leaderboard">
+        </ol>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>

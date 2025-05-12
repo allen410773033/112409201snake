@@ -77,7 +77,6 @@ function loadLeaderboard() {
                 const listItem = document.createElement('li');
                 listItem.innerHTML = `
                     <span class="leaderboard-info">${entry.name} - 分數: ${entry.score}</span>
-                    <span class="leaderboard-time">時間: ${formatPlayTime(entry.playTime)} (${entry.saveTime})</span>
                 `;
                 leaderboardElement.appendChild(listItem);
             });

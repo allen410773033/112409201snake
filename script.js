@@ -1,7 +1,3 @@
-// 移除以下 import 語句
-// import { initializeApp } from "firebase/app";
-// import { getDatabase, ref, push, onValue, orderByChild, limitToLast } from "firebase/database";
-
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const startButton = document.getElementById("startButton");
@@ -21,17 +17,14 @@ const firebaseConfig = {
 };
 
 // 初始化 Firebase
-const app = firebase.initializeApp(firebaseConfig); // 直接使用全局的 firebase 物件
-const database = firebase.database(app); // 直接使用全局的 firebase 物件
-const scoresRef = firebase.database().ref(database, 'scores'); // 直接使用全局的 firebase 物件
-
-// ... (其餘的 JavaScript 程式碼保持不變，但需要將 import 的函數替換為全局 firebase 物件的方法)
+const app = firebase.initializeApp(firebaseConfig);
+const database = firebase.database(app); // 使用 app 實例來獲取 database
 
 // 從 Firebase 載入排行榜資料並顯示
 function loadLeaderboard() {
-    const leaderboardQuery = firebase.database().ref(database, 'scores').orderByChild('score').limitToLast(10); // 直接使用全局的 firebase 物件
+    const leaderboardQuery = firebase.database().ref(database, 'scores').orderByChild('score').limitToLast(10);
 
-    firebase.database().ref(database, 'scores').orderByChild('score').limitToLast(10).on('value', (snapshot) => { // 直接使用全局的 firebase 物件
+    leaderboardQuery.on('value', (snapshot) => {
         const scoresData = snapshot.val();
         const leaderboardEntries = [];
 
@@ -74,7 +67,7 @@ function gameOver() {
         const playTime = endTime - startTime;
         const saveTime = new Date().toLocaleString(); // 儲存時的時間
 
-        firebase.database().ref(database, 'scores').push({ // 直接使用全局的 firebase 物件
+        firebase.database().ref(database, 'scores').push({
             name: playerName,
             score: score,
             playTime: playTime,

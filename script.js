@@ -48,13 +48,45 @@ const database = firebase.database(app);
 
 // 從 Firebase 載入排行榜資料並顯示
 function loadLeaderboard() {
-    // ... loadLeaderboard() 函數的內容
+    const leaderboardQuery = firebase.database().ref('scores').orderByChild('score').limitToLast(10);
+
+    leaderboardQuery.on('value', (snapshot) => {
+        const scoresData = snapshot.val();
+        const leaderboardEntries = [];
+
+        if (scoresData) {
+            for (const key in scoresData) {
+                leaderboardEntries.push(scoresData[key]);
+            }
+
+            // 依照分數降序排序
+            leaderboardEntries.sort((a, b) => b.score - a.score);
+
+            // 清空現有的排行榜
+            leaderboardElement.innerHTML = '';
+
+            // 顯示排行榜
+            leaderboardEntries.forEach(entry => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span class="leaderboard-info">${entry.name} - 分數: ${entry.score}</span>
+                    <span class="leaderboard-time">時間: ${formatPlayTime(entry.playTime)} (${entry.saveTime})</span>
+                `;
+                leaderboardElement.appendChild(listItem);
+            });
+        } else {
+            leaderboardElement.innerHTML = '<li>目前沒有排行榜記錄</li>';
+        }
+    });
 }
 
 // 啟動遊戲
 function startGame() {
-    initGame();
-    // ... startGame() 函數的內容
+    initGame(); // 確保在開始遊戲時調用 initGame
+    startButton.disabled = true;
+    startTime = Math.floor(Date.now() / 1000); // 如果需要計時器
+    gameInterval = setInterval(gameLoop, gameSpeed);
+    timerInterval = setInterval(updateTimer, 1000); // 如果需要計時器
 }
 
 // 更新計時器 (如果需要)
@@ -89,7 +121,6 @@ function gameLoop() {
     drawObstacles(); // 繪製障礙物
 }
 
-// ... (其餘的遊戲邏輯函數：moveSnake, draw, generateFood, generateObstacles, drawObstacles, drawScore, checkCollision, checkObstacleCollision, checkBottomBorderCollision, checkFoodCollision, gameOver, formatPlayTime)
 // 移動蛇
 function moveSnake() {
     const head = { ...snake[0] };
@@ -245,10 +276,10 @@ function gameOver() {
     alert("遊戲結束!");
     startButton.disabled = false;
 
-    //  ===  新增：取得玩家名稱並儲存分數到 Firebase  ===
+    //  ===  新增：取得玩家名稱並儲存分數到 Firebase  ===
     const playerName = prompt("請輸入你的名字：");
     if (playerName) {
-        const scoresRef = firebase.database().ref('scores'); //  資料庫中的 'scores' 路徑
+        const scoresRef = firebase.database().ref('scores'); //  資料庫中的 'scores' 路徑
         scoresRef.push({
             name: playerName,
             score: score

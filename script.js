@@ -5,6 +5,8 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const leaderboardElement = document.getElementById("leaderboard");
 
+function initGame()
+
 // Firebase 設定
 const firebaseConfig = {
     apiKey: "AIzaSyClCiMATI27RbmaCcgWxrpEQXJjT5FSbic",

@@ -41,7 +41,15 @@ function initGame() {
 }
 
 // Firebase 設定
-const firebaseConfig = { ... };
+const firebaseConfig = {
+  apiKey: "AIzaSyClCiMATI27RbmaCcgWxrpEQXJjT5FSbic",
+  authDomain: "snake-game-909b0.firebaseapp.com",
+  databaseURL: "https://snake-game-909b0-default-rtdb.firebaseio.com",
+  projectId: "snake-game-909b0",
+  storageBucket: "snake-game-909b0.firebasestorage.app",
+  messagingSenderId: "382031762505",
+  appId: "1:382031762505:web:7cd5f06de4f283d0071b98"
+};
 const app = firebase.initializeApp(firebaseConfig);
 const database = firebase.database(app);
 
